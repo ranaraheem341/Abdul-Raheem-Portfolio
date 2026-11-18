@@ -1,0 +1,14 @@
+.section { padding-block: var(--section-space); border-top: 1px solid var(--color-border); }
+.layout { display: grid; gap: 2.5rem; }
+.layout > *, .content { min-width: 0; }
+.description { display: grid; gap: 1.25rem; max-width: 44rem; color: var(--color-muted); line-height: 1.85; }
+.description > p:first-child { color: var(--color-foreground); font-size: 1.125rem; }
+.highlights { display: grid; gap: 1rem; margin-top: 2rem; }
+.highlight { border-top: 2px solid var(--color-accent); }
+.highlight:last-child { border-top-color: var(--color-highlight); }
+.mark { color: var(--color-highlight); font-family: var(--font-geist-mono), monospace; font-size: 0.6875rem; }
+.title { margin-top: 0.875rem; font-size: 1rem; font-weight: 600; }
+.highlight p { margin-top: 0.625rem; color: var(--color-muted); font-size: 0.875rem; }
+@media (min-width: 40rem) { .highlights { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64rem) { .layout { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: 4rem; } }
+@media (forced-colors: active) { .highlight, .highlight:last-child { border-top-color: CanvasText; } }
