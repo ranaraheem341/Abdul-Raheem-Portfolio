@@ -1,7 +1,12 @@
 .hero { display: grid; align-items: center; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4.5rem) 1.5rem; }
 .copy, .visual { min-width: 0; }
 .identityMark { width: 0.5rem; height: 0.5rem; flex-shrink: 0; background: #009eec; border: 2px solid #bceaff; border-radius: 50%; box-shadow: 0 0 10px #008cff55; }
-.name { margin-top: 1.25rem; padding-bottom: .1em; font-size: clamp(2.6rem, 6.6vw, 5.6rem); font-weight: 750; line-height: 1.02; letter-spacing: -.055em; text-transform: uppercase; color: #405d76; background: linear-gradient(176deg, #faffff 4%, #607b94 20%, #effaff 31%, #476078 45%, #102b46 49%, #e4f1fb 54%, #8dabc1 70%, #19364f 85%, #f5fcff 98%); background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 1px #ffffff) drop-shadow(0 2px 2px #33516a44); }
+.name { margin-top: 1.25rem; padding-bottom: .1em; font-size: clamp(2.6rem, 6.6vw, 5.6rem); font-weight: 800; line-height: .98; letter-spacing: -.045em; text-transform: uppercase; color: #0b1f3a; }
+.nameLast { position: relative; display: block; width: fit-content; max-width: 100%; color: #102b50; filter: drop-shadow(0 1px 1px #0b1f3a1a); }
+.nameLast::after { content: ""; position: absolute; left: 0; bottom: -.08em; width: 30%; max-width: 3rem; height: 2px; border-radius: 1px; background: linear-gradient(90deg, #008bdd, #22b8e8); }
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .nameLast { background: linear-gradient(90deg, #102b50 0%, #1558aa 52%, #008bdd 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+}
 .headline { margin-top: .75rem; font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 650; line-height: 1.2; letter-spacing: -.035em; }
 .headline > span { color: #8ba8c2; }
 .introduction { max-width: 34rem; margin-top: 1.25rem; color: var(--color-muted); font-size: .9375rem; line-height: 1.75; }
@@ -34,4 +39,4 @@
 @media (min-width: 64rem) { .hero { min-height: 34rem; } .visual { min-height: 30rem; grid-template-columns: minmax(0, 1fr) minmax(8.5rem, .5fr); gap: .75rem; } .specialties { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 47.999rem) { .visual { width: 100%; max-width: 32rem; justify-self: center; } .name { max-width: 9ch; } .placeholder { min-height: 23rem; } .portrait { max-width: 22rem; } .photo { object-position: 50% 15%; } }
 @media (max-width: 24rem) { .actions { flex-direction: column; } .specialty { gap: .4rem; padding: .75rem .5rem; } .specialty svg { flex-basis: 1.5rem; width: 1.5rem; } }
-@media (forced-colors: active) { .name { background: none; -webkit-text-fill-color: CanvasText; filter: none; } .specialty, .statistics { border-color: CanvasText; } .monogram { color: CanvasText; text-shadow: none; } }
+@media (forced-colors: active) { .name, .nameLast { background: none; -webkit-text-fill-color: CanvasText; filter: none; } .nameLast::after { background: CanvasText; } .specialty, .statistics { border-color: CanvasText; } .monogram { color: CanvasText; text-shadow: none; } }

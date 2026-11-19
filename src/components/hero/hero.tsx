@@ -1,7 +1,10 @@
 import Image from "next/image";
+import { Manrope } from "next/font/google";
 import { Badge, Button, Container } from "@/components/ui";
 import { publicAsset, type PublicPortfolio } from "@/lib/public-portfolio";
 import styles from "./hero.module.css";
+
+const manrope = Manrope({ subsets: ["latin"], weight: "800", display: "swap" });
 
 const specialties = [
   { title: "Cloud", detail: "AWS / Microsoft 365", path: "M6 18h12a4 4 0 0 0 0-8 6 6 0 0 0-11-2 5 5 0 0 0-1 10Z" },
@@ -15,6 +18,7 @@ export function Hero({ content }: { content?: PublicPortfolio | null }) {
   const photo = content?.media.find(item => item.purpose === "photo");
   const cv = content?.media.find(item => item.purpose === "cv");
   const name = profile?.full_name || "Abdul Raheem";
+  const [firstName, ...remainingNames] = name.trim().split(/\s+/);
   const initials = name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join("");
   const counts = content ? [
     { value: content.projects.length, label: "Published projects" },
@@ -26,7 +30,7 @@ export function Hero({ content }: { content?: PublicPortfolio | null }) {
     <section id="home" tabIndex={-1} aria-labelledby="hero-title" className={styles.hero}>
       <div className={`${styles.copy} intro-enter`}>
         <Badge variant="accent"><span className={styles.identityMark} aria-hidden="true" />{profile?.headline || "IT Executive & Infrastructure Professional"}</Badge>
-        <h1 id="hero-title" className={styles.name}>{name}</h1>
+        <h1 id="hero-title" className={`${manrope.className} ${styles.name}`}>{firstName}{remainingNames.length > 0 && <> <span className={styles.nameLast}>{remainingNames.join(" ")}</span></>}</h1>
         <p className={styles.headline}>{profile?.headline || <>IT Infrastructure <span aria-hidden="true">|</span><br />Cloud &amp; DevOps</>}</p>
         <p className={styles.introduction}>{profile ? profile.professional_summary : "I help organizations maintain reliable IT infrastructure, secure enterprise networks, and efficient technology operations, with capabilities spanning Windows Server, Microsoft 365, cloud deployment, and DevOps tooling."}</p>
         <div className={styles.actions}>
