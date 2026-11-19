@@ -1,5 +1,55 @@
-.hero { display: grid; align-items: center; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4.5rem) 1.5rem; }
+.hero { position: relative; isolation: isolate; display: grid; align-items: center; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4.5rem) 1.5rem; }
 .copy, .visual { min-width: 0; }
+.ambient { position: absolute; z-index: -1; inset: 0; overflow: clip; pointer-events: none; animation-play-state: paused; }
+.ambient::before { content: ""; position: absolute; top: 5%; right: 0; width: min(36rem, 90%); height: 90%; border-radius: 50%; background: radial-gradient(ellipse, #c0e7ff40, #e0f3ff20 45%, transparent 70%); }
+@media (prefers-reduced-motion: no-preference) {
+  .copy > * { animation: hero-reveal 700ms var(--ease-ui) backwards; }
+  .copy > :nth-child(2) { animation-delay: 70ms; }
+  .copy > :nth-child(3) { animation-delay: 140ms; }
+  .copy > :nth-child(4) { animation-delay: 210ms; }
+  .copy > :nth-child(5) { animation-delay: 280ms; }
+  .copy > :focus-within { animation: none; }
+  .visual { animation: hero-depth 900ms var(--ease-ui) 120ms backwards; }
+  .nameLast::after { transform-origin: left; animation: name-accent 900ms var(--ease-ui) 300ms backwards; }
+  .specialty { transition: transform 280ms var(--ease-ui), box-shadow 280ms var(--ease-ui); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .specialty:hover { transform: translateY(-3px); box-shadow: inset 0 1px 2px #fff, 0 10px 24px #158fff30; }
+}
+@media (min-width: 48rem) and (prefers-reduced-motion: no-preference) {
+  .ambient::before { animation: ambient-drift 22s ease-in-out infinite; animation-play-state: inherit; }
+  .ambient[data-motion-active] { animation-play-state: running; }
+  :global([data-motion-paused]) .ambient { animation-play-state: paused; }
+  .portrait { animation: portrait-float 8s ease-in-out infinite; animation-play-state: paused; }
+  .portrait[data-motion-active] { animation-play-state: running; }
+  :global([data-motion-paused]) .portrait { animation-play-state: paused; }
+  .portraitFrame::before { animation: portrait-ambient 12s ease-in-out infinite; animation-play-state: inherit; }
+  .portraitFrame { animation-play-state: inherit; }
+}
+@keyframes hero-depth {
+  from { opacity: 0; translate: 0 12px; scale: .98; }
+  to { opacity: 1; translate: 0 0; scale: 1; }
+}
+@keyframes name-accent {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes ambient-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .6; }
+  50% { transform: translate3d(-3%, 2%, 0) scale(1.04); opacity: 1; }
+}
+@keyframes hero-reveal {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes portrait-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+}
+@keyframes portrait-ambient {
+  0%, 100% { opacity: .65; }
+  50% { opacity: 1; }
+}
 .identityMark { width: 0.5rem; height: 0.5rem; flex-shrink: 0; background: #009eec; border: 2px solid #bceaff; border-radius: 50%; box-shadow: 0 0 10px #008cff55; }
 .name { margin-top: 1.25rem; padding-bottom: .1em; font-size: clamp(2.6rem, 6.6vw, 5.6rem); font-weight: 800; line-height: .98; letter-spacing: -.045em; text-transform: uppercase; color: #0b1f3a; }
 .nameLast { position: relative; display: block; width: fit-content; max-width: 100%; color: #102b50; filter: drop-shadow(0 1px 1px #0b1f3a1a); }
@@ -8,7 +58,24 @@
   .nameLast { background: linear-gradient(90deg, #102b50 0%, #1558aa 52%, #008bdd 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 }
 .headline { margin-top: .75rem; font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 650; line-height: 1.2; letter-spacing: -.035em; }
-.headline > span { color: #8ba8c2; }
+/* Every role occupies the same grid cell, reserving the tallest wrapped title. */
+.roles { display: grid; min-width: 0; padding-block: .15em; overflow: clip; animation-play-state: paused; }
+.role { grid-area: 1 / 1; align-self: center; min-width: 0; overflow-wrap: anywhere; opacity: 0; }
+.role:first-child { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .role { animation: role-rotate 14.4s var(--ease-ui) infinite; animation-play-state: inherit; }
+  .role:nth-child(2) { animation-delay: -10.8s; }
+  .role:nth-child(3) { animation-delay: -7.2s; }
+  .role:nth-child(4) { animation-delay: -3.6s; }
+  .roles[data-motion-active] { animation-play-state: running; }
+  :global([data-motion-paused]) .roles,
+  .headline:is(:hover, :focus-within) .roles { animation-play-state: paused; }
+}
+@keyframes role-rotate {
+  0%, 21%, 100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  25% { opacity: 0; transform: translate3d(0, -.65em, 0); }
+  25.01%, 96% { opacity: 0; transform: translate3d(0, .65em, 0); }
+}
 .introduction { max-width: 34rem; margin-top: 1.25rem; color: var(--color-muted); font-size: .9375rem; line-height: 1.75; }
 .actions { display: flex; flex-wrap: wrap; gap: .875rem; margin-top: 1.5rem; }
 .visual { position: relative; isolation: isolate; display: grid; align-items: center; grid-template-columns: minmax(0, 1fr); gap: 1rem; }

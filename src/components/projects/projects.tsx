@@ -17,11 +17,11 @@ export function Projects({ content }: { content?: PublicPortfolio | null }) {
           description="Technical work, implementation decisions, and documented evidence."
         />
         {hasProjects ? (
-          <div className={styles.grid}>
+          <div className={styles.grid} data-motion-stagger>
             {content ? content.projects.map((project) => <PublishedProjectCard key={project.id} project={project} media={content.media} />) : verifiedProjects.map((project) => <ProjectCard key={project.slug} project={project} />)}
           </div>
         ) : (
-          <Card className={styles.empty}>
+          <Card className={styles.empty} data-motion-reveal>
             <span className={styles.icon} aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" focusable="false">
                 <path d="M4 7.5h6l2-3h8v15H4z" strokeLinejoin="round" />

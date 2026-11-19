@@ -23,12 +23,12 @@ export function Skills({ records }: { records?: PublicRow<"skills">[] }) {
           headingId="skills-title"
           description="A foundation in IT infrastructure, networking, and technical support, alongside continued development in cloud and DevOps."
         />
-        {stack.length > 0 && <aside className={styles.stack} aria-labelledby="stack-title">
+        {stack.length > 0 && <aside className={styles.stack} aria-labelledby="stack-title" data-motion-reveal>
           <h3 id="stack-title" className={styles.stackTitle}>Technology Stack</h3>
           <ul className={styles.stackGrid}>{stack.map((name, index) => <li key={name}><span aria-hidden="true" className={styles.stackMark}>{String(index + 1).padStart(2, "0")}</span><span>{name}</span></li>)}</ul>
         </aside>}
         {categories.length === 0 && <p className={styles.note}>Published technical skills will appear here when available.</p>}
-        <div className={styles.grid}>
+        <div className={styles.grid} data-motion-stagger>
           {categories.map((category) => <SkillCard key={category.id} category={category} />)}
         </div>
       </Container>

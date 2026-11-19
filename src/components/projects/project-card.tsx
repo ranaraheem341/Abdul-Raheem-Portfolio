@@ -7,7 +7,7 @@ import { publicAsset, safePublicUrl, type PublicPortfolio, type PublicRow } from
 export function PublishedProjectCard({ project, media }: { project: PublicRow<"projects">; media: PublicPortfolio["media"] }) {
   const repository = safePublicUrl(project.source_url);
   const live = safePublicUrl(project.project_url);
-  return <article aria-labelledby={`project-${project.id}-title`} className={styles.article}>
+  return <article aria-labelledby={`project-${project.id}-title`} className={styles.article} data-motion-reveal>
     <Card className={styles.card}>
       <h3 id={`project-${project.id}-title`} className={styles.title}>{project.title}</h3>
       <p className={styles.description}>{project.description}</p>
@@ -15,7 +15,7 @@ export function PublishedProjectCard({ project, media }: { project: PublicRow<"p
         {project.technologies.map((technology, index) => <li key={index}><Badge className={styles.badge}>{technology}</Badge></li>)}
       </ul>
       {media.filter((item) => item.purpose === "screenshot" && item.draft_project_id === project.id).map((item) => <figure key={item.id} className={styles.figure}>
-        <Image src={publicAsset(item.id)} alt={item.alt_text} width={1200} height={800} unoptimized className={styles.image} />
+        <div className={styles.imageFrame}><Image src={publicAsset(item.id)} alt={item.alt_text} width={1200} height={800} unoptimized className={styles.image} /></div>
       </figure>)}
       {(repository || live) && <div className={styles.actions}>
         {repository && <Button href={repository} variant="outline" className={styles.button}>View repository</Button>}
@@ -33,7 +33,7 @@ export function ProjectCard({ project }: { project: ProjectDefinition }) {
   const availableFields = caseStudyFields.filter((field) => caseStudy?.[field.key]?.trim());
 
   return (
-    <article aria-labelledby={titleId} className={styles.article}>
+    <article aria-labelledby={titleId} className={styles.article} data-motion-reveal>
       <Card className={styles.card}>
         <div className={styles.badges}>
           <Badge variant="accent" className={styles.badge}>{project.category}</Badge>
@@ -49,8 +49,8 @@ export function ProjectCard({ project }: { project: ProjectDefinition }) {
         )}
         {project.screenshots?.map((screenshot) => (
           <figure key={screenshot.image.src} className={styles.figure}>
-            <Image src={screenshot.image} alt={screenshot.alt} className={styles.image}
-              sizes="(min-width: 76rem) 520px, (min-width: 48rem) 45vw, 90vw" />
+            <div className={styles.imageFrame}><Image src={screenshot.image} alt={screenshot.alt} className={styles.image}
+              sizes="(min-width: 76rem) 520px, (min-width: 48rem) 45vw, 90vw" /></div>
             {screenshot.caption && <figcaption className={styles.caption}>{screenshot.caption}</figcaption>}
           </figure>
         ))}

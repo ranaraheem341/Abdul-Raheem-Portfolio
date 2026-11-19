@@ -75,6 +75,18 @@ const buttonUrl = await componentUrl('src/components/ui/button.tsx', {});
 const { Header } = await import(await componentUrl('src/components/layout/header.tsx', {
   '@/components/ui/container': uiUrl, './brand': chromeUrl, '@/components/ui': buttonUrl, './navigation': chromeUrl, '@/lib/public-portfolio': readerUrl,
 }));
+const { SkillsMarquee } = await import(await componentUrl('src/components/skills/skills-marquee.tsx', {
+  '@/components/ui': uiUrl, './skills-marquee.module.css': cssUrl,
+}));
+
+test('public skills marquee has one accessible technology list and no manual animation control', () => {
+  const markup = renderToStaticMarkup(createElement(SkillsMarquee));
+  assert.doesNotMatch(markup, /<input|checkbox|Pause skills motion/);
+  assert.match(markup, /data-motion-loop/);
+  assert.match(markup, /aria-hidden="true"/);
+  assert.match(markup, /tabindex="0"/);
+  assert.equal((markup.match(/aria-label="Technologies"/g) ?? []).length, 1);
+});
 
 test('published LinkedIn, Fiverr and email render in Contact and Footer while newer drafts remain private', async () => {
   const published = [
@@ -190,7 +202,9 @@ test('public media pagination preserves approval filters across pages without le
 const mediaUiUrl = moduleUrl('export function Container({children}) { return children; } export function Card({children}) { return children; } export function Badge({children}) { return children; } export function Button({children}) { return children; }');
 const imageUrl = moduleUrl(`import { createElement } from ${JSON.stringify(import.meta.resolve('react'))}; export default function Image({unoptimized,...props}) { return createElement('img',props); }`);
 const projectDataUrl = moduleUrl('export const caseStudyFields = []; export const projectStatusLabels = {};');
+const fontUrl = moduleUrl('export function Manrope() { return { className: "test-manrope" }; }');
 const { Hero } = await import(await componentUrl('src/components/hero/hero.tsx', {
+  'next/font/google': fontUrl,
   '@/components/ui': mediaUiUrl, 'next/image': imageUrl, '@/lib/public-portfolio': readerUrl, './hero.module.css': cssUrl,
 }));
 const { PublishedProjectCard } = await import(await componentUrl('src/components/projects/project-card.tsx', {

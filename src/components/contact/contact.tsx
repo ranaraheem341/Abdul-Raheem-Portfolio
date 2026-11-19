@@ -10,8 +10,8 @@ export function Contact({ links = contactLinks }: { links?: readonly ContactDefi
       <Container>
         <SectionHeading eyebrow="LET'S CONNECT" title="Let's Build Something Extraordinary" headingId="contact-title"
           description="Whether you need help with IT infrastructure, networking, Windows Server administration, cloud deployment, or DevOps workflows, I'd be happy to discuss your project or professional opportunity." />
-        <div className={styles.layout}>
-          <aside className={styles.intro} aria-labelledby="contact-options-title">
+        <div className={styles.layout} data-motion-stagger>
+          <aside className={styles.intro} aria-labelledby="contact-options-title" data-motion-reveal>
             <span className="eyebrow">A good conversation starts here</span>
             <h3 id="contact-options-title" className={styles.subtitle}>Projects &amp; professional opportunities</h3>
             <p>Have an infrastructure challenge, a deployment in mind, or a role to discuss? Share a little context so we can start with what matters to you.</p>
@@ -25,7 +25,7 @@ export function Contact({ links = contactLinks }: { links?: readonly ContactDefi
               {activeLinks.length ? <ul>{activeLinks.map(({ label, href }) => <li key={label}><a href={href!}>{label}<span aria-hidden="true"> ↗</span></a></li>)}</ul> : <p>Verified contact links will be added when available.</p>}
             </div>
           </aside>
-          <Card className={styles.panel}><ContactForm /></Card>
+          <Card className={styles.panel} data-motion-reveal><ContactForm /></Card>
         </div>
       </Container>
     </section>

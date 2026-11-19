@@ -11,7 +11,7 @@ export function Services() {
       <Container>
         <SectionHeading eyebrow="WHAT I OFFER" title="Professional IT & Cloud Services" headingId="services-title"
           description="Practical IT infrastructure, cloud deployment, and automation services designed to help businesses build, maintain, and troubleshoot their technology environments." />
-        <div className={styles.grid}>
+        <div className={styles.grid} data-motion-stagger>
           {services.map((service) => <ServiceCard key={service.id} service={service} />)}
         </div>
         <div className={styles.closing}>

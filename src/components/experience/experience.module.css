@@ -4,6 +4,18 @@
 .entry { position: relative; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); align-items: start; gap: 0.75rem; }
 .marker { position: relative; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; margin-top: 1.5rem; border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-background); color: var(--color-muted); font-family: var(--font-geist-mono), monospace; font-size: 0.625rem; }
 .entry:first-child .marker { color: var(--color-highlight); border-color: var(--color-highlight); }
+.entry::before { content: ""; position: absolute; left: 1.125rem; top: 2.625rem; bottom: -3.125rem; width: 1px; background: linear-gradient(#4bbaf1, #9acfee); transform-origin: top; }
+.entry:last-child::before { display: none; }
+.marker { transition: border-color 280ms var(--ease-ui), box-shadow 280ms var(--ease-ui), color 280ms var(--ease-ui); }
+.entry:is(:hover, :focus-within) .marker { color: var(--color-highlight); border-color: var(--color-highlight); box-shadow: 0 0 0 4px #38bdf815; }
+@media (prefers-reduced-motion: no-preference) {
+  .entry[data-reveal="pending"]::before { transform: scaleY(0); }
+  .entry[data-reveal="visible"]::before { animation: timeline-draw 900ms var(--ease-ui) var(--reveal-delay, 0ms) backwards; }
+}
+@keyframes timeline-draw {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
 .article, .identity, .period { min-width: 0; }
 .identity { flex: 1; }
 .card { background: linear-gradient(120deg, #3b82f608, transparent 60%), var(--color-background-secondary); }
@@ -26,9 +38,9 @@
 @media (max-width: 29.999rem) {
   .entry { grid-template-columns: 1.5rem minmax(0, 1fr); gap: 0.5rem; }
   .marker { width: 1.5rem; height: 1.5rem; font-size: 0.5625rem; }
-  .timeline::before { left: 0.75rem; }
+  .timeline::before, .entry::before { left: 0.75rem; }
 }
 @media (forced-colors: active) {
-  .timeline::before, .focus li::before { background: CanvasText; }
+  .timeline::before, .entry::before, .focus li::before { background: CanvasText; }
   .marker, .entry:first-child .marker { border-color: CanvasText; }
 }

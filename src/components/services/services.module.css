@@ -65,6 +65,11 @@
 }
 
 .card:focus-within { border-color: var(--color-highlight); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card[data-motion-tilt]:hover { transform: perspective(1000px) translateY(-4px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); }
+  .icon { transition: transform 360ms var(--ease-ui), box-shadow 360ms var(--ease-ui); }
+  .card:is(:hover, :focus-within) .icon { transform: translateY(-2px); box-shadow: inset 0 1px #fff, 0 6px 14px #009af019; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .card, .button { transition: none; }

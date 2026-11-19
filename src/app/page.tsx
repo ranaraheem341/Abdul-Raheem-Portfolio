@@ -1,10 +1,12 @@
 ﻿import { Hero } from "@/components/hero/hero";
 
 import { About } from "@/components/about/about";
+import { PortfolioMotion } from "@/components/layout/portfolio-motion";
 import type { Metadata } from "next";
 import { personJsonLd, siteDescription, siteTitle, siteUrl } from "@/lib/seo";
 import { Experience } from "@/components/experience/experience";
 import { Skills } from "@/components/skills/skills";
+import { SkillsMarquee } from "@/components/skills/skills-marquee";
 import { Services } from "@/components/services/services";
 import { Projects } from "@/components/projects/projects";
 import { Credentials } from "@/components/credentials/credentials";
@@ -47,8 +49,9 @@ export default async function Home() {
           __html: JSON.stringify(person).replace(/</g, "\\u003c"),
         }}
       />
-      <div className="public-theme public-portfolio">
+      <PortfolioMotion>
       <Hero content={content} />
+      <SkillsMarquee />
       <Projects content={content} />
       <Skills records={content?.skills} />
       <Services />
@@ -56,7 +59,7 @@ export default async function Home() {
       <Experience records={content?.experience} />
       <Credentials content={content} />
       <Contact links={content?.links} />
-      </div>
+      </PortfolioMotion>
     </>
   );
 }

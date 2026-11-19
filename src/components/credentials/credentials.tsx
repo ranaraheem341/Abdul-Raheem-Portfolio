@@ -21,33 +21,33 @@ export function Credentials({ content }: { content?: PublicPortfolio | null }) {
         />
         <div className={styles.grid}>
           <div className={styles.group}>
-            <h3 className={styles.groupTitle}>Education</h3>
+            <h3 className={styles.groupTitle} data-motion-reveal>Education</h3>
             {hasEducation ? (
-              <div className={styles.records}>
+              <div className={styles.records} data-motion-stagger>
                 {content ? content.education.map((record) => <PublishedEducationCard key={record.id} education={record} />) : verifiedEducation.map((record) => <EducationCard key={record.slug} education={record} />)}
               </div>
             ) : (
-              <Card className={styles.empty}>
+              <Card className={styles.empty} data-motion-reveal>
                 <span className={styles.kicker}>Academic background</span>
                 <p>Education details will be published once verified and approved for sharing.</p>
               </Card>
             )}
           </div>
           <div className={styles.group}>
-            <h3 className={styles.groupTitle}>Certifications</h3>
+            <h3 className={styles.groupTitle} data-motion-reveal>Certifications</h3>
             {hasCertifications ? (
-              <div className={styles.records}>
+              <div className={styles.records} data-motion-stagger>
                 {content ? content.certifications.map((record) => <PublishedCertificationCard key={record.id} certification={record} />) : verifiedCertifications.map((record) => <CertificationCard key={record.slug} certification={record} />)}
               </div>
             ) : (
-              <Card className={styles.empty}>
+              <Card className={styles.empty} data-motion-reveal>
                 <span className={styles.kicker}>Professional credentials</span>
                 <p>Verified certification details will be added as they become available.</p>
               </Card>
             )}
           </div>
         </div>
-        <Card className={styles.resume}>
+        <Card className={styles.resume} data-motion-reveal>
           <span className={styles.icon} aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" focusable="false">
               <path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h5" strokeLinecap="round" strokeLinejoin="round" />

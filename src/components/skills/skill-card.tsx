@@ -7,7 +7,7 @@ export function SkillCard({ category }: { category: SkillCategory }) {
   const titleId = `skills-${category.id}-title`;
 
   return (
-    <article aria-labelledby={titleId} className={styles.article}>
+    <article aria-labelledby={titleId} className={styles.article} data-motion-reveal>
       <Card className={styles.card}>
         <span className={styles.icon}><SkillIcon name={category.icon} /></span>
         <h3 id={titleId} className={styles.title}>{category.title}</h3>

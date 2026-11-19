@@ -6,6 +6,13 @@ import styles from "./hero.module.css";
 
 const manrope = Manrope({ subsets: ["latin"], weight: "800", display: "swap" });
 
+const professionalRoles = [
+  "IT Infrastructure Specialist",
+  "DevOps & Cloud Engineer",
+  "Windows Server & Network Administrator",
+  "Microsoft 365 & IT Support Specialist",
+];
+
 const specialties = [
   { title: "Cloud", detail: "AWS / Microsoft 365", path: "M6 18h12a4 4 0 0 0 0-8 6 6 0 0 0-11-2 5 5 0 0 0-1 10Z" },
   { title: "Infrastructure", detail: "Windows Server / AD", path: "M4 3h16v7H4zM4 14h16v7H4zM7 6h1m3 0h6M7 17h1m3 0h6" },
@@ -28,10 +35,16 @@ export function Hero({ content }: { content?: PublicPortfolio | null }) {
   ] : [];
   return <Container>
     <section id="home" tabIndex={-1} aria-labelledby="hero-title" className={styles.hero}>
-      <div className={`${styles.copy} intro-enter`}>
+      <div className={styles.ambient} aria-hidden="true" data-motion-loop />
+      <div className={styles.copy}>
         <Badge variant="accent"><span className={styles.identityMark} aria-hidden="true" />{profile?.headline || "IT Executive & Infrastructure Professional"}</Badge>
         <h1 id="hero-title" className={`${manrope.className} ${styles.name}`}>{firstName}{remainingNames.length > 0 && <> <span className={styles.nameLast}>{remainingNames.join(" ")}</span></>}</h1>
-        <p className={styles.headline}>{profile?.headline || <>IT Infrastructure <span aria-hidden="true">|</span><br />Cloud &amp; DevOps</>}</p>
+        <p className={styles.headline} tabIndex={0}>
+          <span className="sr-only">Professional roles: {professionalRoles.join("; ")}.</span>
+          <span className={styles.roles} aria-hidden="true" data-motion-loop>
+            {professionalRoles.map(role => <span key={role} className={styles.role}>{role}</span>)}
+          </span>
+        </p>
         <p className={styles.introduction}>{profile ? profile.professional_summary : "I help organizations maintain reliable IT infrastructure, secure enterprise networks, and efficient technology operations, with capabilities spanning Windows Server, Microsoft 365, cloud deployment, and DevOps tooling."}</p>
         <div className={styles.actions}>
           <Button href="/#projects" size="lg">View My Work <span aria-hidden="true">&rarr;</span></Button>
@@ -39,7 +52,7 @@ export function Hero({ content }: { content?: PublicPortfolio | null }) {
         </div>
       </div>
       <div className={styles.visual}>
-        <div className={styles.portrait}>
+        <div className={styles.portrait} data-motion-loop>
           {photo ? <div className={styles.portraitFrame}><Image src={publicAsset(photo.id)} alt={photo.alt_text} width={640} height={760} unoptimized className={styles.photo} /></div> : <div className={styles.placeholder}><span className={styles.monogram}>{initials}</span><span className={styles.portraitLabel}>{name}</span><span className={styles.portraitNote}>Infrastructure. Cloud. Possibility.</span></div>}
           <div className={styles.serverVisual} aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M38 53h77a18 18 0 0 0 0-36 29 29 0 0 0-55-1 19 19 0 0 0-22 37Z" fill="#edf8ff" stroke="#6acbff" strokeWidth="2" /><path d="M80 53v18m-35 0h70" stroke="#16a7ee" strokeWidth="2" />{[75, 93, 111].map(y => <g key={y}><rect x="30" y={y} width="100" height="14" rx="4" fill="#e9f4ff" stroke="#80bce9" /><path d={`M40 ${y+7}h46`} stroke="#488fc5" /><circle cx="117" cy={y+7} r="2" fill="#009af0" /></g>)}</svg></div>
         </div>
@@ -51,7 +64,7 @@ export function Hero({ content }: { content?: PublicPortfolio | null }) {
         </ul>
       </div>
     </section>
-    <aside className={styles.statistics} aria-label="Portfolio overview">
+    <aside className={styles.statistics} aria-label="Portfolio overview" data-motion-reveal>
       {counts.length ? <dl className={styles.counts}>{counts.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.value.toLocaleString("en")}</dd></div>)}</dl> : <div className={styles.principles}>{["Reliable IT", "Scalable cloud", "Practical DevOps"].map((item, index) => <p key={item}><span aria-hidden="true">0{index + 1}</span>{item}</p>)}</div>}
       <p className={styles.statement}>Thoughtful systems.<br />Reliable operations.</p>
     </aside>

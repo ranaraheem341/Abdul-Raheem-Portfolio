@@ -41,9 +41,9 @@ export function Experience({ records }: { records?: PublicRow<"experience">[] })
     <section id="experience" tabIndex={-1} aria-labelledby="experience-title" className={styles.section}>
       <Container>
         <SectionHeading eyebrow="Career journey" title="Professional Experience" headingId="experience-title" description="A background in technical support, infrastructure, and day-to-day IT operations." />
-        <ol className={styles.timeline} role="list">
+        <ol className={styles.timeline} role="list" data-motion-stagger>
           {entries.map((experience, index) => (
-            <li key={experience.id} className={styles.entry}>
+            <li key={experience.id} className={styles.entry} data-motion-reveal>
               <span className={styles.marker} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               <article aria-labelledby={`${experience.id}-title`} className={styles.article}>
                 <Card className={styles.card}>

@@ -41,3 +41,13 @@ textarea.input { resize: vertical; }
 
 .intro { padding: clamp(1rem, 3vw, 2rem); border: 1px solid #fff; border-radius: var(--radius-card); background: radial-gradient(ellipse at bottom right, #b0ddff66, transparent 70%), #ffffff55; }
 .input { background: #ffffffbf; border-color: #99b7d4; }
+.input { transition: border-color 240ms var(--ease-ui), box-shadow 240ms var(--ease-ui), background 240ms var(--ease-ui); }
+.input:focus-visible { background: #fafdff; box-shadow: 0 0 0 4px #159fea15, inset 0 1px #fff; }
+.field label { transition: color 240ms var(--ease-ui); }
+.field:focus-within label { color: var(--color-highlight); }
+.connections a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .3em; transition: text-decoration-color 240ms var(--ease-ui); }
+.connections a:is(:hover, :focus-visible) { text-decoration-color: currentColor; }
+@media (prefers-reduced-motion: no-preference) {
+  .connections a span { transition: translate 240ms var(--ease-ui); }
+  .connections a:is(:hover, :focus-visible) span { translate: 2px -2px; }
+}

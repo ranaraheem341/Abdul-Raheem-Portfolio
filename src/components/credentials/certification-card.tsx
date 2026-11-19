@@ -5,7 +5,7 @@ import { publicDate, safePublicUrl, type PublicRow } from "@/lib/public-portfoli
 
 export function PublishedCertificationCard({ certification }: { certification: PublicRow<"certifications"> }) {
   const href = safePublicUrl(certification.credential_url);
-  return <article><Card className={styles.record}>
+  return <article data-motion-reveal><Card className={styles.record}>
     <h4 className={styles.recordTitle}>{certification.name}</h4><p>{certification.issuer}</p>
     <dl className={styles.facts}>
       {certification.issued_on && <div><dt>Issued</dt><dd>{publicDate(certification.issued_on)}</dd></div>}
@@ -20,7 +20,7 @@ export function CertificationCard({ certification }: { certification: Certificat
   const completed = certification.status === "completed";
 
   return (
-    <article>
+    <article data-motion-reveal>
       <Card className={styles.record}>
         <Badge className={styles.badge} variant={completed ? "accent" : "default"}>
           {completed ? "Completed" : "In progress — not yet certified"}

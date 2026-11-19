@@ -89,6 +89,12 @@
 .stackGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .625rem; }
 .stackGrid li { display: flex; min-width: 0; align-items: center; gap: .625rem; padding: .75rem; border: 1px solid #fff; border-radius: .875rem; background: linear-gradient(145deg, #ffffffdf, #e8f2ffbf); box-shadow: 0 4px 8px #487cad12; font-size: .75rem; }
 .stackMark { flex-shrink: 0; font-size: .6875rem; font-weight: 650; color: #0076c0; }
+.stackGrid li, .badge { transition: background 240ms var(--ease-ui), border-color 240ms var(--ease-ui), box-shadow 240ms var(--ease-ui); }
+.stackGrid li:hover, .badges li:hover .badge { border-color: #7bc4ee; background: #f2fbff; box-shadow: 0 3px 12px #159cea1a; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .icon { transition: transform 320ms var(--ease-ui); }
+  .card:hover .icon { transform: translateY(-2px) rotate(-3deg); }
+}
 @media (min-width: 48rem) { .stackGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (min-width: 72rem) { .stackGrid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 @media (forced-colors: active) { .stack, .stackGrid li { border-color: CanvasText; } .stackMark { color: CanvasText; } }

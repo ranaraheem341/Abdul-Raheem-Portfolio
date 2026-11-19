@@ -1,0 +1,46 @@
+.marquee {
+  min-width: 0;
+  margin-block: 0 1.5rem;
+  padding: 1rem 0;
+  border-block: 1px solid #bbd7ee;
+  background: linear-gradient(110deg, #ffffff70, #dceeff55, #ffffff70);
+  animation-play-state: paused;
+}
+.header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; padding-inline: 1rem; margin-bottom: .875rem; }
+.caption { color: #315477; font-size: .625rem; font-weight: 650; letter-spacing: .15em; text-transform: uppercase; }
+.viewport { min-width: 0; padding-block: .25rem; }
+.viewport:focus-visible { outline-offset: 3px; border-radius: .5rem; }
+.track { min-width: 0; }
+.group { display: flex; flex-wrap: wrap; gap: .625rem; padding-inline: 1rem; list-style: none; }
+.group li { flex: 0 0 auto; padding: .5rem .875rem; border: 1px solid #bdd7ee; border-radius: 99px; color: #183c63; background: linear-gradient(135deg, #ffffffcf, #dcecff9c); box-shadow: inset 0 1px #fff; font-size: .8125rem; line-height: 1.5; transition: border-color 240ms var(--ease-ui), background 240ms var(--ease-ui), box-shadow 240ms var(--ease-ui); }
+.group li:hover { border-color: #69bcee; background: #f3fbff; box-shadow: inset 0 1px #fff, 0 2px 8px #159cea24; }
+.duplicate { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    mask-image: linear-gradient(90deg, transparent, #000 2rem, #000 calc(100% - 2rem), transparent);
+  }
+  .viewport::-webkit-scrollbar { display: none; }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: skills-travel 60s linear infinite;
+    animation-play-state: inherit;
+  }
+  .group { flex: 0 0 auto; flex-wrap: nowrap; gap: .625rem; padding-inline: 0 .625rem; }
+  .duplicate { display: flex; }
+  .marquee[data-motion-active] { animation-play-state: running; }
+  .viewport { animation-play-state: inherit; }
+  :global([data-motion-paused]) .marquee,
+  .marquee:is(:hover, :focus-within) { animation-play-state: paused; }
+}
+@keyframes skills-travel {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@media (forced-colors: active) {
+  .marquee, .group li { border-color: CanvasText; }
+  .group li { color: CanvasText; background: Canvas; box-shadow: none; }
+  .viewport { mask-image: none; }
+}

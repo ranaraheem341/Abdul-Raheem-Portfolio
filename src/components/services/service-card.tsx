@@ -8,8 +8,8 @@ export function ServiceCard({ service }: { service: ServiceDefinition }) {
   const destination = serviceDestination(service);
 
   return (
-    <article aria-labelledby={titleId} className={styles.article}>
-      <Card className={styles.card}>
+    <article aria-labelledby={titleId} className={styles.article} data-motion-reveal>
+      <Card className={styles.card} data-motion-tilt>
         <div className={styles.topline}>
           <span className={styles.icon}><ServiceIcon name={service.icon} /></span>
           <Badge className={styles.category}>{service.category}</Badge>

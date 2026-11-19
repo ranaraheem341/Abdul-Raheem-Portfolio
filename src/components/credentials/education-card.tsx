@@ -4,7 +4,7 @@ import styles from "./credentials.module.css";
 import { publicDate, type PublicRow } from "@/lib/public-portfolio";
 
 export function PublishedEducationCard({ education }: { education: PublicRow<"education"> }) {
-  return <article><Card className={styles.record}>
+  return <article data-motion-reveal><Card className={styles.record}>
     <h4 className={styles.recordTitle}>{education.qualification}</h4>
     <p>{education.institution}</p>
     {(education.start_date || education.end_date) && <dl className={styles.facts}><div><dt>Attendance dates</dt>
@@ -17,7 +17,7 @@ export function EducationCard({ education }: { education: EducationDefinition })
   if (!isPublishable(education)) return null;
 
   return (
-    <article>
+    <article data-motion-reveal>
       <Card className={styles.record}>
         <Badge className={styles.badge} variant={education.status === "completed" ? "accent" : "default"}>
           {educationStatusLabels[education.status]}
